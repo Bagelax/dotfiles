@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/ssd/brainalyzed/frontend/server/routes'
+let g:netrw_dirhist_3='/ssd/brainalyzed/backend-service/backend_service/api/helpers'
+let g:netrw_dirhist_2='/etc/X11/xorg.conf.d'
+let g:netrw_dirhist_1='/usr/lib/modules/5.9.1-arch1-1'
