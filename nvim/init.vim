@@ -47,14 +47,19 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'lukas-reineke/indent-blankline.nvim'
-
+Plug 'projekt0n/github-nvim-theme'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'sphamba/smear-cursor.nvim'
 
 call plug#end()
 
-
-colorscheme nord
+colorscheme github_dark_default
 set termguicolors " this variable must be enabled for colors to be applied properly
 
 lua require("init")
 
 let g:airline_powerline_fonts = 1
+
+hi TrailingWhitespace ctermbg=red guibg=red
+call matchadd("TrailingWhitespace", '\v\s+$')

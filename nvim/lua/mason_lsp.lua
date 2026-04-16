@@ -1,35 +1,41 @@
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "lua_ls",
-    "rust_analyzer",
-    "bashls",
-    "clangd",
-    "pylsp",
-    "dockerls",
-    "docker_compose_language_service",
-    "gopls",
-    "cmake",
-    "autotools_ls",
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Apply shared defaults to all LSPs (root markers + capabilities)
+vim.lsp.config('*', {
+  capabilities = capabilities,
+  root_markers = { '.git', 'Makefile', '.luarc.json' },
+})
+
+-- Per-server overrides
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    },
   },
 })
 
-require("lspconfig").lua_ls.setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-}
-require("lspconfig").rust_analyzer.setup {}
-require("lspconfig").bashls.setup {}
-require("lspconfig").clangd.setup {}
-require("lspconfig").pylsp.setup {}
-require("lspconfig").dockerls.setup {}
-require("lspconfig").docker_compose_language_service.setup {}
-require("lspconfig").gopls.setup {}
-require("lspconfig").cmake.setup {}
-require("lspconfig").autotools_ls.setup {}
+vim.lsp.config('clangd', {
+  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+})
 
+-- Enable all servers
+local servers = {
+    'lua_ls',
+    'rust_analyzer',
+    'bashls',
+    'clangd',
+    'pylsp',
+    'dockerls',
+    'docker_compose_language_service',
+    'gopls',
+    'cmake',
+    'autotools_ls',
+    'buf_ls',
+}
+
+for _, server in ipairs(servers) do
+  vim.lsp.enable(server)
+end
